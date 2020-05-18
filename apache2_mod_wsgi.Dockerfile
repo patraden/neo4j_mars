@@ -6,3 +6,5 @@ COPY install.sh /usr/local/bin/mod_wsgi-docker-install
 RUN /usr/local/bin/mod_wsgi-docker-install
 COPY setup.sh /usr/local/bin/mod_wsgi-docker-setup
 RUN /usr/local/bin/mod_wsgi-docker-setup
+ENV MOD_WSGI_USER=wsgi-user MOD_WSGI_GROUP=root
+WORKDIR /app

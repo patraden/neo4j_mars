@@ -33,7 +33,7 @@ test ! -z "$MOD_WSGI_VERSION" || exit 1
 # mod_wsgi from source code
 
 apt-get install -y apache2=$APACHE_VERSION apache2-dev=$APACHE_VERSION locales mariadb-client \
-    curl --no-install-recommends
+    curl libcap2-bin --no-install-recommends
 
 # Clean up the package index.
 
