@@ -106,12 +106,11 @@ chmod 1777 /app
 mkdir -p /data
 chmod 1777 /data
 
-# Clean up the temporary build area.
-
-rm -rf $BUILD_ROOT
-
-# Configure and enable mod_wsgi with apache2
+# Configure and enable mod_wsgi
 
 echo "LoadModule wsgi_module /usr/lib/apache2/modules/mod_wsgi.so" > /etc/apache2/mods-available/mod_wsgi.load
-
 a2enmod mod_wsgi
+
+# Clean up the temporary build area and temporary configuration files
+
+rm -rf $BUILD_ROOT
