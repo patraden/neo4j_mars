@@ -1,3 +1,26 @@
+#!/usr/bin/env bash
+
+# Record everything that is run from this script so appears in logs.
+
+set -x
+
+# Ensure that any failure within this script causes this script to fail
+# immediately. This eliminates the need to check individual statuses for
+# anything which is run and prematurely exit. Note that the feature of
+# bash to exit in this way isn't foolproof. Ensure that you heed any
+# advice in:
+#
+#   http://mywiki.wooledge.org/BashFAQ/105
+#   http://fvue.nl/wiki/Bash:_Error_handling
+#
+# and use best practices to ensure that failures are always detected.
+# Any user supplied scripts should also use this failure mode.
+
+set -eo pipefail
+
+# Generating virtual host conf file
+
+cat << EOF > /etc/apache2/sites-available/$CERTIFICATE_NAME.wsgi.conf
 <VirtualHost *:443>
 	# The ServerName directive sets the request scheme, hostname and port that
 	# the server uses to identify itself. This is used when creating
@@ -7,15 +30,15 @@
 	# value is not decisive as it is used as a last resort host regardless.
 	# However, you must set it for any further virtual host explicitly.
 	
-	ServerName applications.testservice.mars
+	ServerName $CERTIFICATE_NAME
 	
 	SSLEngine on
-	SSLCertificateFile /etc/ssl/certs/applications.testservice.mars.crt
-	SSLCertificateKeyFile /etc/ssl/private/applications.testservice.mars.key
+	SSLCertificateFile /etc/ssl/certs/$CERTIFICATE_NAME.crt
+	SSLCertificateKeyFile /etc/ssl/private/$CERTIFICATE_NAME.key
 	
-	WSGIScriptAlias / /app/application1/wsgi_test.wsgi
+	WSGIScriptAlias /$APP_DIRECTORY /app/$APP_DIRECTORY/$APP_WSGI_FILE_NAME.wsgi
 	
-	<Directory /app/application1>
+	<Directory /app/$APP_DIRECTORY>
 		AuthType Basic
 		AuthName "Restricted Content"
 		AuthUserFile /etc/apache2/.htpasswd
@@ -23,15 +46,15 @@
 	</Directory>
 	
 	ServerAdmin webmaster@localhost
-	DocumentRoot /app/application1
+	DocumentRoot /app/$APP_DIRECTORY
 	# Available loglevels: trace8, ..., trace1, debug, info, notice, warn,
 	# error, crit, alert, emerg.
 	# It is also possible to configure the loglevel for particular
 	# modules, e.g.
 	#LogLevel info ssl:warn
 	
-	ErrorLog ${APACHE_LOG_DIR}/error.log
-	CustomLog ${APACHE_LOG_DIR}/access.log combined
+	ErrorLog \${APACHE_LOG_DIR}/error.log
+	CustomLog \${APACHE_LOG_DIR}/access.log combined
 	
 	# For most configuration files from conf-available/, which are
 	# enabled or disabled at a global level, it is possible to
@@ -42,3 +65,4 @@
 </VirtualHost>
 
 # vim: syntax=apache ts=4 sw=4 sts=4 sr noet
+EOF

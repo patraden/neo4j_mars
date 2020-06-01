@@ -1,12 +1,20 @@
 # docker build --build-args that must be used while building container image
-# CERTIFICATE_NAME - full name of certificate file from Mars CA
-# CERTIFICATE_PASSWORD - password for Mars CA certificate
+# export CERTIFICATE_PASSWORD=<PASSWORD> # password
+# export CERTIFICATE_NAME=<PFX_FILE_NAME> # applications.testservice.mars
+# export CONTAINER_IMAGE_NAME=<NAME> # mod_wsgi_ssl_image
+# export CONTAINER_NAME=<NAME> # MOD_WSGI_SSL
+# export BASIC_USER=<ADMIN_USER_NAME> # automation_user
+# export BASIC_USER_PASSWORD=<ADMIN_USER_PASSWORD> # password
+# export APP_DIRECTORY=<DIRECTORY_NAME> # application1
+# export APP_WSGI_FILE_NAME=<WSGI_FILE_NAME> # wsgi_test
 
 FROM python:3.8-slim-buster
 ARG CERTIFICATE_PASSWORD
 ARG CERTIFICATE_NAME
 ARG BASIC_USER
 ARG BASIC_USER_PASSWORD
+ARG APP_DIRECTORY
+ARG APP_WSGI_FILE_NAME
 MAINTAINER denis.patrakhin@gmail.com
 
 ENV APACHE_VERSION=2.4.38-3+deb10u3 \
@@ -18,8 +26,10 @@ RUN /usr/local/bin/mod_wsgi-docker-install
 COPY setup.sh /usr/local/bin/mod_wsgi-docker-setup
 RUN /usr/local/bin/mod_wsgi-docker-setup
 
-COPY setup_ssl.sh /usr/local/bin/mod_wsgi-docker-setup-ssl
-COPY *.apps.wsgi.conf /etc/apache2/sites-available/
+COPY configure.sh /usr/local/bin/mod_wsgi-docker-configure-apache
+RUN /usr/local/bin/mod_wsgi-docker-configure-apache
+
+COPY setupssl.sh /usr/local/bin/mod_wsgi-docker-setup-ssl
 COPY ${CERTIFICATE_NAME}.pfx /tmp
 RUN /usr/local/bin/mod_wsgi-docker-setup-ssl
 

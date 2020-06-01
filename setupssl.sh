@@ -39,7 +39,7 @@ cd /etc/apache2/sites-enabled/
 a2dissite *
 
 cd /etc/apache2/sites-available/
-find . -type f -and -name "*.apps.wsgi.conf" -exec a2ensite {} \;
+find . -type f -and -name "*.wsgi.conf" -exec a2ensite {} \;
 
 # Setting admin user for basic authentication to applications
 
