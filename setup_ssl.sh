@@ -41,6 +41,10 @@ a2dissite *
 cd /etc/apache2/sites-available/
 find . -type f -and -name "*.apps.wsgi.conf" -exec a2ensite {} \;
 
+# Setting admin user for basic authentication to applications
+
+htpasswd -bc /etc/apache2/.htpasswd $BASIC_USER $BASIC_USER_PASSWORD
+
 # Clean up the temporary files
 
 rm -r /tmp/*
