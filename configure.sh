@@ -18,7 +18,7 @@ set -x
 
 set -eo pipefail
 
-# Generating virtual host conf file
+# Generating virtual host conf file for multiple applications
 
 cat << EOF > /etc/apache2/sites-available/$CERTIFICATE_NAME.wsgi.conf
 <VirtualHost *:443>
@@ -35,23 +35,29 @@ cat << EOF > /etc/apache2/sites-available/$CERTIFICATE_NAME.wsgi.conf
 	SSLEngine on
 	SSLCertificateFile /etc/ssl/certs/$CERTIFICATE_NAME.crt
 	SSLCertificateKeyFile /etc/ssl/private/$CERTIFICATE_NAME.key
-	
-	WSGIScriptAlias /$APP_DIRECTORY /app/$APP_DIRECTORY/$APP_WSGI_FILE_NAME.wsgi
-	
-	<Directory /app/$APP_DIRECTORY>
+EOF
+
+sed -n '/^[^#]/p' /tmp/apps.list | while IFS=':' read -r FILE DIRECTORY URI
+do 
+cat << EOF >> /etc/apache2/sites-available/$CERTIFICATE_NAME.wsgi.conf
+	WSGIScriptAlias $URI /app/$DIRECTORY/$FILE.wsgi
+	<Directory /app/$DIRECTORY>
 		AuthType Basic
 		AuthName "Restricted Content"
 		AuthUserFile /etc/apache2/.htpasswd
 		Require valid-user
 	</Directory>
-	
+EOF
+done
+
+cat << EOF >> /etc/apache2/sites-available/$CERTIFICATE_NAME.wsgi.conf
+	DocumentRoot /app
 	ServerAdmin webmaster@localhost
-	DocumentRoot /app/$APP_DIRECTORY
 	# Available loglevels: trace8, ..., trace1, debug, info, notice, warn,
 	# error, crit, alert, emerg.
 	# It is also possible to configure the loglevel for particular
 	# modules, e.g.
-	#LogLevel info ssl:warn
+	LogLevel info ssl:info
 	
 	ErrorLog \${APACHE_LOG_DIR}/error.log
 	CustomLog \${APACHE_LOG_DIR}/access.log combined

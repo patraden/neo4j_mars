@@ -1,0 +1,4 @@
+# <wsgi_file_name>:<directory in root>:<URI>
+wsgi_test:application1:/app1
+app1_wsgi:application2:/app2
+app2_wsgi:application3:/app3

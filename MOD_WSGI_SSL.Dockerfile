@@ -27,6 +27,7 @@ COPY setup.sh /usr/local/bin/mod_wsgi-docker-setup
 RUN /usr/local/bin/mod_wsgi-docker-setup
 
 COPY configure.sh /usr/local/bin/mod_wsgi-docker-configure-apache
+COPY apps.list /tmp/apps.list
 RUN /usr/local/bin/mod_wsgi-docker-configure-apache
 
 COPY setupssl.sh /usr/local/bin/mod_wsgi-docker-setup-ssl
