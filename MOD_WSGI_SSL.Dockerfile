@@ -5,8 +5,6 @@
 # export CONTAINER_NAME=<NAME> # MOD_WSGI_SSL
 # export BASIC_USER=<ADMIN_USER_NAME> # automation_user
 # export BASIC_USER_PASSWORD=<ADMIN_USER_PASSWORD> # password
-# export APP_DIRECTORY=<DIRECTORY_NAME> # application1
-# export APP_WSGI_FILE_NAME=<WSGI_FILE_NAME> # wsgi_test
 
 FROM python:3.8-slim-buster
 ARG CERTIFICATE_PASSWORD
