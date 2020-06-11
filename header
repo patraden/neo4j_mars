@@ -1,7 +1,0 @@
-# /openapi/v1/sensors
-https://marsinfo.tetrationcloud.com/openapi/v1/sensors
-User-Agent: Cisco Tetration Python client
-Content-Type: application/json
-Id: bb238a00e45d477381b40f9a3b6612a4
-Timestamp: 2020-06-10T13:53:20+0000
-Authorization: mZ1yq9seSrhkmOPa4mmaeK0Y9vdX1THm1UHP+ugBNAo=
