@@ -40,7 +40,7 @@ EOF
 sed -n '/^[^#]/p' /tmp/apps.list | while IFS=':' read -r FILE DIRECTORY URI
 do 
 cat << EOF >> /etc/apache2/sites-available/$CERTIFICATE_NAME.wsgi.conf
-	WSGIScriptAlias $URI /app/$DIRECTORY/$FILE.wsgi
+	WSGIScriptAlias $URI /app/$DIRECTORY/$FILE
 	<Directory /app/$DIRECTORY>
 		AuthType Basic
 		AuthName "Restricted Content"

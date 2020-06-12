@@ -1,18 +1,13 @@
-# docker build --build-args that must be used while building container image
-# export CERTIFICATE_PASSWORD=<PASSWORD> # password
-# export CERTIFICATE_NAME=<PFX_FILE_NAME> # applications.testservice.mars
-# export CONTAINER_IMAGE_NAME=<NAME> # mod_wsgi_ssl_image
-# export CONTAINER_NAME=<NAME> # MOD_WSGI_SSL
-# export BASIC_USER=<ADMIN_USER_NAME> # automation_user
-# export BASIC_USER_PASSWORD=<ADMIN_USER_PASSWORD> # password
+# export CERTIFICATE_PASSWORD=<PASSWORD>
+# export CERTIFICATE_NAME=<PFX_FILE_NAME>
+# export BASIC_USER=<ADMIN_USER_NAME>
+# export BASIC_USER_PASSWORD=<ADMIN_USER_PASSWORD>
 
 FROM python:3.8-slim-buster
 ARG CERTIFICATE_PASSWORD
 ARG CERTIFICATE_NAME
 ARG BASIC_USER
 ARG BASIC_USER_PASSWORD
-ARG APP_DIRECTORY
-ARG APP_WSGI_FILE_NAME
 MAINTAINER denis.patrakhin@gmail.com
 
 ENV APACHE_VERSION=2.4.38-3+deb10u3 \

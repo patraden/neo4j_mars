@@ -1,0 +1,41 @@
+# export CERTIFICATE_PASSWORD=<PASSWORD>
+# export CERTIFICATE_NAME=<PFX_FILE_NAME>
+# export BASIC_USER=<ADMIN_USER_NAME>
+# export BASIC_USER_PASSWORD=<ADMIN_USER_PASSWORD>
+# export MYSQL_ROOT_PASSWORD=<MYSQL_ROOT_PASSWORD>
+version: "3.8"
+services:
+ mariadb:
+  image: linuxserver/mariadb
+  container_name: mariadbs
+  environment:
+   - PUID=1000
+   - PGID=1000
+   - MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
+   - TZ=Europe/Moscow
+  volumes:
+   - /home/pi/mariadbs:/config
+  ports:
+   - "3306:3306"
+  restart: unless-stopped
+ python:
+  build:
+   context: .
+   dockerfile: MOD_WSGI_SSL.Dockerfile
+   args:
+    CERTIFICATE_PASSWORD : $CERTIFICATE_PASSWORD
+    CERTIFICATE_NAME : $CERTIFICATE_NAME
+    BASIC_USER : $BASIC_USER
+    BASIC_USER_PASSWORD : $BASIC_USER_PASSWORD
+  container_name: MOD_WSGI_SSL
+  tty: true
+  volumes:
+   - /home/pi/mod_wsgi_docker/${APP1:-magic_s}:/app/${APP1:-magic_s}
+   - /home/pi/mod_wsgi_docker/${APP2:-test_application}:/app/${APP2:-test_application}
+   - /home/pi/pythonstudy:/app/pythonstudy
+   - /home/pi/longnumbers:/app/longnumbers
+  ports:
+   - "80:80"
+   - "443:443"
+  depends_on:
+   - mariadb
