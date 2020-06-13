@@ -10,3 +10,9 @@ export BASIC_USER_PASSWORD=<ADMIN_USER_PASSWORD> # password
 export MYSQL_ROOT_PASSWORD=<MYSQL_ROOT_PASSWORD> # password
 docker-compose up -d
 ```
+
+Temporary notes:
+```
+docker exec -ti -u wsgi-user MOD_WSGI_SSL /bin/bash -c 'mysql -h mariadbs -u root -p'
+docker exec -ti -u wsgi-user MOD_WSGI_SSL /bin/bash -c 'python3 ./pythonstudy/heap_class.py'
+```
