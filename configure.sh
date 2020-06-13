@@ -83,6 +83,10 @@ a2dissite *
 cd /etc/apache2/sites-available/
 find . -type f -and -name "*.wsgi.conf" -exec a2ensite {} \;
 
+# Installing python modules
+
+pip install -r /tmp/requirements.txt
+
 # Clean up the temporary files
 
 rm -r /tmp/*

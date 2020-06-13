@@ -8,8 +8,12 @@ https://docs.djangoproject.com/en/2.2/howto/deployment/wsgi/
 """
 
 import os
+import sys
 
 from django.core.wsgi import get_wsgi_application
+
+sys.path.append('/app/magic_s')
+sys.path.append('/app/magic_s/magic_s')
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'magic_s.settings')
 
