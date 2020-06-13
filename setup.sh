@@ -33,7 +33,7 @@ LANG=en_US.UTF-8
 # run. This has group of 'root' with gid of '0' as it appears to be
 # safest bet to allow file system permisions for everything to work.
 
-adduser --disabled-password --gecos "wsgi-user" --uid 1001 --gid 0 \
+adduser --disabled-password --gecos "wsgi-user" --uid 1000 --gid 0 \
    --home /home/wsgi wsgi-user
 
 # Set the umask to be '002' so that any files/directories created from
@@ -71,6 +71,11 @@ make
 make install
 make clean
 
+# Installing python virtualenv
+
+python3 -m pip install --upgrade pip
+python3 -m pip install --no-cache-dir virtualenv
+
 # Because the recommendation is that the derived Docker image should run
 # as a non root user, we enable the ability for Apache 'httpd'  when run
 # as a non root user to bind privileged ports normally used by system
@@ -106,10 +111,26 @@ chmod 1777 /app
 mkdir -p /data
 chmod 1777 /data
 
-# Configure and enable mod_wsgi
+# Generating and setting private and public keys from Mars AD *.psx CA certificate file.
+# Password for .psx file should be provided as argument to docker build: --build-arg CERRTIFICATE_PASSWORD='password'
+# Finally modifying permissions for resulting certificate files to be accessible to root only
+
+openssl pkcs12 -in /tmp/$CERTIFICATE_NAME.pfx -nocerts -nodes -out /tmp/tmp.key -passin pass:$CERTIFICATE_PASSWORD
+openssl rsa -in /tmp/tmp.key -out /etc/ssl/private/$CERTIFICATE_NAME.key #removs password from private key
+openssl pkcs12 -in /tmp/$CERTIFICATE_NAME.pfx -clcerts -nokeys -out /etc/ssl/certs/$CERTIFICATE_NAME.crt -passin pass:$CERTIFICATE_PASSWORD
+
+chmod 0600 /etc/ssl/certs/$CERTIFICATE_NAME.crt
+chmod 0600 /etc/ssl/private/$CERTIFICATE_NAME.key
+
+# Configure and enable mod_wsgi and ssl with apache2
 
 echo "LoadModule wsgi_module /usr/lib/apache2/modules/mod_wsgi.so" > /etc/apache2/mods-available/mod_wsgi.load
 a2enmod mod_wsgi
+a2enmod ssl
+
+# Setting admin user for basic authentication to applications
+
+htpasswd -bc /etc/apache2/.htpasswd $BASIC_USER $BASIC_USER_PASSWORD
 
 # Clean up the temporary build area and temporary configuration files
 

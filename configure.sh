@@ -35,12 +35,14 @@ cat << EOF > /etc/apache2/sites-available/$CERTIFICATE_NAME.wsgi.conf
 	SSLEngine on
 	SSLCertificateFile /etc/ssl/certs/$CERTIFICATE_NAME.crt
 	SSLCertificateKeyFile /etc/ssl/private/$CERTIFICATE_NAME.key
+	WSGIDaemonProcess $CERTIFICATE_NAME user=#1000 group=#0 processes=2 threads=25 python-home=/usr/local
+	WSGIProcessGroup $CERTIFICATE_NAME
 EOF
 
 sed -n '/^[^#]/p' /tmp/apps.list | while IFS=':' read -r FILE DIRECTORY URI
 do 
 cat << EOF >> /etc/apache2/sites-available/$CERTIFICATE_NAME.wsgi.conf
-	WSGIScriptAlias $URI /app/$DIRECTORY/$FILE
+	WSGIScriptAlias $URI /app/$DIRECTORY/$FILE process-group=$CERTIFICATE_NAME
 	<Directory /app/$DIRECTORY>
 		AuthType Basic
 		AuthName "Restricted Content"
@@ -72,3 +74,15 @@ cat << EOF >> /etc/apache2/sites-available/$CERTIFICATE_NAME.wsgi.conf
 
 # vim: syntax=apache ts=4 sw=4 sts=4 sr noet
 EOF
+
+# Disable default virtual hosts configurations and enabling only relevant configurations
+
+cd /etc/apache2/sites-enabled/
+a2dissite *
+
+cd /etc/apache2/sites-available/
+find . -type f -and -name "*.wsgi.conf" -exec a2ensite {} \;
+
+# Clean up the temporary files
+
+rm -r /tmp/*

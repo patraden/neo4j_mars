@@ -17,17 +17,16 @@ COPY install.sh /usr/local/bin/mod_wsgi-docker-install
 RUN /usr/local/bin/mod_wsgi-docker-install
 
 COPY setup.sh /usr/local/bin/mod_wsgi-docker-setup
+COPY ${CERTIFICATE_NAME}.pfx /tmp
 RUN /usr/local/bin/mod_wsgi-docker-setup
 
 COPY configure.sh /usr/local/bin/mod_wsgi-docker-configure-apache
 COPY apps.list /tmp/apps.list
 RUN /usr/local/bin/mod_wsgi-docker-configure-apache
 
-COPY setupssl.sh /usr/local/bin/mod_wsgi-docker-setup-ssl
-COPY ${CERTIFICATE_NAME}.pfx /tmp
-RUN /usr/local/bin/mod_wsgi-docker-setup-ssl
+COPY requirements.txt /tmp/requirements.txt
+RUN pip install -r /tmp/requirements.txt
 
 ENV MOD_WSGI_USER=wsgi-user MOD_WSGI_GROUP=root
-
 CMD apachectl -D FOREGROUND
 WORKDIR /app

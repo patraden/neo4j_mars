@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'magic_s',
-		'mod_wsgi.server',
 ]
 
 MIDDLEWARE = [
