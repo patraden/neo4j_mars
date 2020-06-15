@@ -15,4 +15,14 @@ Temporary notes:
 ```
 docker exec -ti -u wsgi-user MOD_WSGI_SSL /bin/bash -c 'mysql -h mariadbs -u root -p'
 docker exec -ti -u wsgi-user MOD_WSGI_SSL /bin/bash -c 'python3 ./pythonstudy/heap_class.py'
+mysql -h 0 -u pi -p
+```
+
+```sql
+CREATE DATABASE `mydb`;
+CREATE USER 'user' IDENTIFIED BY 'password';
+GRANT USAGE ON *.* TO 'user'@'%' IDENTIFIED BY 'password';
+GRANT ALL privileges ON `mydb`.* TO 'myuser'@'%';
+FLUSH PRIVILEGES;
+SHOW GRANTS FOR 'pi'@'%';
 ```
