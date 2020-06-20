@@ -26,3 +26,10 @@ GRANT ALL privileges ON `mydb`.* TO 'myuser'@'%';
 FLUSH PRIVILEGES;
 SHOW GRANTS FOR 'pi'@'%';
 ```
+## Snow data analytics
+
+```sql
+select sys_class_name,count(number) as count, count(case when automation_flag='M' then number end) as M, count(case when automation_flag='A' then number end) as A from tasks group by sys_class_name order by count desc;
+
+select sys_class_name,assignment_group,count(number) as count, count(case when automation_flag='M' then number end) as M, count(case when automation_flag='A' then number end) as A from tasks where sys_class_name='Change task' group by sys_class_name,assignment_group order by count desc limit 10;
+```

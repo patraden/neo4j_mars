@@ -1,1 +1,4 @@
 django
+httplib2
+urllib3
+mysqlclient

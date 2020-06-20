@@ -6,7 +6,7 @@
 version: "3.8"
 services:
  mariadb:
-  image: linuxserver/mariadb
+  image: linuxserver/mariadb:latest
   container_name: mariadbs
   environment:
    - PUID=1000
@@ -23,8 +23,8 @@ services:
    context: .
    dockerfile: MOD_WSGI_SSL.Dockerfile
    args:
-    CERTIFICATE_PASSWORD : $CERTIFICATE_PASSWORD
-    CERTIFICATE_NAME : $CERTIFICATE_NAME
+    CERTIFICATE_PASSWORD : ${CERTIFICATE_PASSWORD:-U;BWy.t7/aj79+a7}
+    CERTIFICATE_NAME : ${CERTIFICATE_NAME:-applications.testservice.mars}
     BASIC_USER : ${BASIC_USER:-admin}
     BASIC_USER_PASSWORD : ${BASIC_USER_PASSWORD:-admin}
   container_name: MOD_WSGI_SSL
@@ -32,6 +32,7 @@ services:
   volumes:
    - /home/pi/mod_wsgi_docker/${APP1:-magic_s}:/app/${APP1:-magic_s}
    - /home/pi/mod_wsgi_docker/${APP2:-test_application}:/app/${APP2:-test_application}
+   - /home/pi/mod_wsgi_docker/${APP3:-text_to_speech}:/app/${APP3:-text_to_speech}
    - /home/pi/pythonstudy:/app/pythonstudy
    - /home/pi/longnumbers:/app/longnumbers
   ports:
