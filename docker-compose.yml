@@ -6,18 +6,31 @@
 version: "3.8"
 services:
  mariadb:
-  image: linuxserver/mariadb:latest
-  container_name: mariadbs
-  environment:
-   - PUID=1000
-   - PGID=1000
-   - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-admin}
-   - TZ=Europe/Moscow
-  volumes:
-   - /home/pi/mariadbs:/config
-  ports:
-   - "3306:3306"
-  restart: unless-stopped
+   image: tobi312/rpi-mariadb:10.3
+   container_name: mariadb
+   volumes:
+     - /home/pi/mariadbs/databases:/var/lib/mysql
+     #- /etc/timezone:/etc/timezone:ro
+     #- /etc/localtime:/etc/localtime:ro
+   environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-admin}
+      #MYSQL_RANDOM_ROOT_PASSWORD: "yes"
+   restart: unless-stopped
+   ports:
+      - 3306:3306
+# mariadb:
+#  image: linuxserver/mariadb:arm32v7-110.4.13mariabionic-ls68
+#  container_name: mariadbs
+#  environment:
+#   - PUID=1000
+#   - PGID=1000
+#   - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-admin}
+#   - TZ=Europe/Moscow
+#  volumes:
+#   - /home/pi/mariadbs:/config
+#  ports:
+#   - "3306:3306"
+#  restart: unless-stopped
  python:
   build:
    context: .
