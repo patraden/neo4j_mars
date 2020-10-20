@@ -10,7 +10,7 @@ ARG BASIC_USER
 ARG BASIC_USER_PASSWORD
 MAINTAINER denis.patrakhin@gmail.com
 
-ENV APACHE_VERSION=2.4.38-3+deb10u3 \
+ENV APACHE_VERSION=2.4.38-3+deb10u3\
     MOD_WSGI_VERSION=4.7.1
 
 COPY install.sh /usr/local/bin/mod_wsgi-docker-install

@@ -5,8 +5,9 @@ import voicerss_tts
 def application(environ, start_response):
     voice = voicerss_tts.speech({
         'key': '26446b3244ee4f96aada13c3a94da441',
-        'hl': 'ru-ru',
-        'src': 'Привет дорогой и любимый мир!',
+#        'hl': 'ru-ru',
+        'hl': 'en-us',
+        'src': 'Hello Denis? How are you today?',
         'r': '0',
         'c': 'mp3',
         'f': '44khz_16bit_stereo',
