@@ -1,0 +1,801 @@
+b'debug'
+b'info'
+b'warning'
+b'error'
+b'critical'
+b'exception'
+NoneType: None
+division by zero
+Traceback (most recent call last):  File './text_to_speech/test.py', line 24, in main    r=a/bZeroDivisionError: division by zero
+b'debug'
+b'info'
+b'warning'
+b'error'
+b'critical'
+b'exception'
+NoneType: None
+division by zero
+Traceback (most recent call last):  File './text_to_speech/test.py', line 24, in main    r=a/bZeroDivisionError: division by zero
+b'debug'
+b'info'
+b'warning'
+b'error'
+b'critical'
+b'exception'
+NoneType: None
+division by zero
+Traceback (most recent call last):  File './text_to_speech/test.py', line 24, in main    r=a/bZeroDivisionError: division by zero
+debug
+info
+warning
+error
+critical
+exception
+NoneType: None
+division by zero
+Traceback (most recent call last):
+  File "./text_to_speech/test.py", line 23, in main
+    r=a/b
+ZeroDivisionError: division by zero
+debug
+info
+warning
+error
+critical
+exception
+NoneType: None
+division by zero
+Traceback (most recent call last):
+  File "./text_to_speech/test.py", line 23, in main
+    r=a/b
+ZeroDivisionError: division by zero
+debug
+info
+warning
+error
+critical
+exception
+NoneType: None
+division by zero
+Traceback (most recent call last):
+  File "./text_to_speech/test.py", line 23, in main
+    r=a/b
+ZeroDivisionError: division by zero
+debug
+info
+warning
+error
+critical
+exception
+NoneType: None
+division by zero
+Traceback (most recent call last):
+  File "./text_to_speech/test.py", line 23, in main
+    r=a/b
+ZeroDivisionError: division by zero
+debug
+info
+warning
+error
+critical
+exception
+NoneType: None
+division by zero
+Traceback (most recent call last):
+  File "./text_to_speech/test.py", line 23, in main
+    r=a/b
+ZeroDivisionError: division by zero
+debug
+info
+warning
+error
+critical
+exception
+NoneType: None
+division by zero
+Traceback (most recent call last):
+  File "./text_to_speech/test.py", line 23, in main
+    r=a/b
+ZeroDivisionError: division by zero
+debug
+info
+warning
+error
+critical
+exception
+NoneType: None
+division by zero
+Traceback (most recent call last):
+  File "./text_to_speech/test.py", line 23, in main
+    r=a/b
+ZeroDivisionError: division by zero
+debug
+info
+warning
+error
+critical
+exception
+NoneType: None
+division by zero
+Traceback (most recent call last):
+  File "./text_to_speech/test.py", line 23, in main
+    r=a/b
+ZeroDivisionError: division by zero
+debug
+info
+warning
+error
+critical
+exception
+NoneType: None
+division by zero
+Traceback (most recent call last):
+  File "./text_to_speech/test.py", line 23, in main
+    r=a/b
+ZeroDivisionError: division by zero
+debug
+info
+warning
+error
+critical
+exception
+NoneType: None
+division by zero
+Traceback (most recent call last):
+  File "./text_to_speech/test.py", line 23, in main
+    r=a/b
+ZeroDivisionError: division by zero
+debug
+info
+warning
+error
+critical
+exception
+NoneType: None
+division by zero
+Traceback (most recent call last):
+  File "./text_to_speech/test.py", line 23, in main
+    r=a/b
+ZeroDivisionError: division by zero
+debug
+info
+warning
+error
+critical
+exception
+NoneType: None
+division by zero
+Traceback (most recent call last):
+  File "./text_to_speech/test.py", line 23, in main
+    r=a/b
+ZeroDivisionError: division by zero
+debug
+info
+warning
+error
+critical
+exception
+NoneType: None
+division by zero
+Traceback (most recent call last):  File './text_to_speech/test.py', line 23, in main    r=a/bZeroDivisionError: division by zero
+debug
+info
+warning
+error
+critical
+exception
+NoneType: None
+division by zero
+Traceback (most recent call last):  File './text_to_speech/test.py', line 23, in main    r=a/bZeroDivisionError: division by zero
+debug
+info
+warning
+error
+critical
+exception
+NoneType: None
+division by zero
+Traceback (most recent call last):  File './text_to_speech/test.py', line 23, in main    r=a/bZeroDivisionError: division by zero
+debug
+info
+warning
+error
+critical
+exception
+NoneType: None
+division by zero
+Traceback (most recent call last):  File './text_to_speech/test.py', line 23, in main    r=a/bZeroDivisionError: division by zero
+debug
+info
+warning
+error
+critical
+exception
+NoneType: None
+division by zero
+Traceback (most recent call last):  File './text_to_speech/test.py', line 23, in main    r=a/bZeroDivisionError: division by zero
+debug
+info
+warning
+error
+critical
+exception
+NoneType: None
+division by zero
+Traceback (most recent call last):  File './text_to_speech/test.py', line 23, in main    r=a/bZeroDivisionError: division by zero
+debug
+info
+warning
+error
+critical
+exception
+NoneType: None
+division by zero
+Traceback (most recent call last):  File './text_to_speech/test.py', line 23, in main    r=a/bZeroDivisionError: division by zero
+debug
+info
+warning
+error
+critical
+exception
+NoneType: None
+division by zero
+Traceback (most recent call last):  File './text_to_speech/test.py', line 23, in main    r=a/bZeroDivisionError: division by zero
+debug
+info
+warning
+error
+critical
+exception
+NoneType: None
+division by zero
+Traceback (most recent call last):  File './text_to_speech/test.py', line 23, in main    r=a/bZeroDivisionError: division by zero
+debug
+info
+warning
+error
+critical
+exception
+NoneType: None
+division by zero
+Traceback (most recent call last):  File './text_to_speech/test.py', line 23, in main    r=a/bZeroDivisionError: division by zero
+b'debug'
+b'info'
+b'warning'
+b'error'
+b'critical'
+b'exception'
+NoneType: None
+division by zero
+Traceback (most recent call last):  File './text_to_speech/test.py', line 23, in main    r=a/bZeroDivisionError: division by zero
+b'debug'
+b'info'
+b'warning'
+b'error'
+b'critical'
+b'exception'
+NoneType: None
+division by zero
+Traceback (most recent call last):  File './text_to_speech/test.py', line 23, in main    r=a/bZeroDivisionError: division by zero
+b'debug'
+b'info'
+b'warning'
+b'error'
+b'critical'
+b'exception'
+NoneType: None
+division by zero
+Traceback (most recent call last):  File './text_to_speech/test.py', line 23, in main    r=a/bZeroDivisionError: division by zero
+b'debug'
+b'info'
+b'warning'
+b'error'
+b'critical'
+b'exception'
+NoneType: None
+division by zero
+Traceback (most recent call last):  File './text_to_speech/test.py', line 23, in main    r=a/bZeroDivisionError: division by zero
+b'debug'
+b'info'
+b'warning'
+b'error'
+b'critical'
+b'exception'
+NoneType: None
+division by zero
+Traceback (most recent call last):  File './text_to_speech/test.py', line 23, in main    r=a/bZeroDivisionError: division by zero
+division by zero
+Traceback (most recent call last):  File './text_to_speech/test.py', line 23, in main    r=a/bZeroDivisionError: division by zero
+division by zero
+Traceback (most recent call last):  File './text_to_speech/test.py', line 23, in main    r=a/bZeroDivisionError: division by zero
+division by zero
+Traceback (most recent call last):  File './text_to_speech/test.py', line 23, in main    r=a/bZeroDivisionError: division by zero
+b'debug'
+b'info'
+b'warning'
+b'error'
+b'critical'
+b'exception'
+NoneType: None
+division by zero
+Traceback (most recent call last):  File './text_to_speech/test.py', line 23, in main    r=a/bZeroDivisionError: division by zero
+b'debug'
+b'info'
+b'warning'
+b'error'
+b'critical'
+b'exception'
+NoneType: None
+division by zero
+Traceback (most recent call last):  File './text_to_speech/test.py', line 23, in main    r=a/bZeroDivisionError: division by zero
+b'debug'
+b'info'
+b'warning'
+b'error'
+b'critical'
+b'exception'
+NoneType: None
+division by zero
+Traceback (most recent call last):  File './text_to_speech/test.py', line 23, in main    r=a/bZeroDivisionError: division by zero
+b'debug'
+b'info'
+b'warning'
+b'error'
+b'critical'
+b'exception'
+NoneType: None
+division by zero
+Traceback (most recent call last):  File './text_to_speech/test.py', line 23, in main    r=a/bZeroDivisionError: division by zero
+b'debug'
+b'info'
+b'warning'
+b'error'
+b'critical'
+b'exception'
+NoneType: None
+division by zero
+Traceback (most recent call last):  File './text_to_speech/test.py', line 23, in main    r=a/bZeroDivisionError: division by zero
+debug
+info
+warning
+error
+critical
+exception
+NoneType: None
+division by zero
+Traceback (most recent call last):
+  File "./text_to_speech/test.py", line 23, in main
+    r=a/b
+ZeroDivisionError: division by zero
+debug
+info
+warning
+error
+critical
+exception
+NoneType: None
+division by zero
+Traceback (most recent call last):
+  File "./text_to_speech/test.py", line 23, in main
+    r=a/b
+ZeroDivisionError: division by zero
+debug
+info
+warning
+error
+critical
+exception
+NoneType: None
+division by zero
+Traceback (most recent call last):
+  File "./text_to_speech/test.py", line 23, in main
+    r=a/b
+ZeroDivisionError: division by zero
+debug
+info
+warning
+error
+critical
+exception
+NoneType: None
+division by zero
+Traceback (most recent call last):
+  File "./text_to_speech/test.py", line 23, in main
+    r=a/b
+ZeroDivisionError: division by zero
+debug
+info
+warning
+error
+critical
+exception
+NoneType: None
+division by zero
+Traceback (most recent call last):
+  File "./text_to_speech/test.py", line 23, in main
+    r=a/b
+ZeroDivisionError: division by zero
+debug
+info
+warning
+error
+critical
+exception
+NoneType: None
+division by zero
+Traceback (most recent call last):
+  File "./text_to_speech/test.py", line 23, in main
+    r=a/b
+ZeroDivisionError: division by zero
+debug
+info
+warning
+error
+critical
+exception
+NoneType: None
+division by zero
+Traceback (most recent call last):
+  File "./text_to_speech/test.py", line 23, in main
+    r=a/b
+ZeroDivisionError: division by zero
+debug
+info
+warning
+error
+critical
+exception
+NoneType: None
+division by zero
+Traceback (most recent call last):
+  File "./text_to_speech/test.py", line 23, in main
+    r=a/b
+ZeroDivisionError: division by zero
+b'debug'
+b'info'
+b'warning'
+b'error'
+b'critical'
+b'exception'
+NoneType: None
+division by zero
+Traceback (most recent call last):  File './text_to_speech/test.py', line 23, in main    r=a/bZeroDivisionError: division by zero
+b'debug'
+b'info'
+b'warning'
+b'error'
+b'critical'
+b'exception'
+NoneType: None
+division by zero
+Traceback (most recent call last):  File './text_to_speech/test.py', line 23, in main    r=a/bZeroDivisionError: division by zero
+b'debug'
+b'info'
+b'warning'
+b'error'
+b'critical'
+b'exception'
+NoneType: None
+division by zero
+Traceback (most recent call last):  File './text_to_speech/test.py', line 23, in main    r=a/bZeroDivisionError: division by zero
+b'debug'
+b'info'
+b'warning'
+b'error'
+b'critical'
+b'exception'
+NoneType: None
+division by zero
+Traceback (most recent call last):  File './text_to_speech/test.py', line 23, in main    r=a/bZeroDivisionError: division by zero
+b'debug'
+b'info'
+b'warning'
+b'error'
+b'critical'
+b'exception'
+NoneType: None
+division by zero
+Traceback (most recent call last):  File './text_to_speech/test.py', line 23, in main    r=a/bZeroDivisionError: division by zero
+b'debug'
+b'info'
+b'warning'
+b'error'
+b'critical'
+b'exception'
+NoneType: None
+division by zero
+Traceback (most recent call last):  File './text_to_speech/test.py', line 23, in main    r=a/bZeroDivisionError: division by zero
+b'debug'
+b'info'
+b'warning'
+b'error'
+b'critical'
+b'exception'
+NoneType: None
+division by zero
+Traceback (most recent call last):  File './text_to_speech/test.py', line 23, in main    r=a/bZeroDivisionError: division by zero
+b'debug'
+b'info'
+b'warning'
+b'error'
+b'critical'
+b'exception'
+NoneType: None
+division by zero
+Traceback (most recent call last):  File './text_to_speech/test.py', line 23, in main    r=a/bZeroDivisionError: division by zero
+b'debug'
+b'info'
+b'warning'
+b'error'
+b'critical'
+b'exception'
+NoneType: None
+division by zero
+Traceback (most recent call last):  File './text_to_speech/test.py', line 23, in main    r=a/bZeroDivisionError: division by zero
+b'debug'
+b'info'
+b'warning'
+b'error'
+b'critical'
+b'exception'
+NoneType: None
+division by zero
+Traceback (most recent call last):  File './text_to_speech/test.py', line 23, in main    r=a/bZeroDivisionError: division by zero
+b'debug'
+b'info'
+b'warning'
+b'error'
+b'critical'
+b'exception'
+NoneType: None
+division by zero
+Traceback (most recent call last):  File './text_to_speech/test.py', line 23, in main    r=a/bZeroDivisionError: division by zero
+b'debug'
+b'info'
+b'warning'
+b'error'
+b'critical'
+b'exception'
+NoneType: None
+division by zero
+Traceback (most recent call last):  File './text_to_speech/test.py', line 23, in main    r=a/bZeroDivisionError: division by zero
+b'debug'
+b'info'
+b'warning'
+b'error'
+b'critical'
+b'exception'
+NoneType: None
+division by zero
+Traceback (most recent call last):  File './text_to_speech/test.py', line 23, in main    r=a/bZeroDivisionError: division by zero
+b'debug'
+b'info'
+b'warning'
+b'error'
+b'critical'
+b'exception'
+NoneType: None
+division by zero
+Traceback (most recent call last):  File './text_to_speech/test.py', line 23, in main    r=a/bZeroDivisionError: division by zero
+b'debug'
+b'info'
+b'warning'
+b'error'
+b'critical'
+b'exception'
+NoneType: None
+division by zero
+Traceback (most recent call last):  File './text_to_speech/test.py', line 23, in main    r=a/bZeroDivisionError: division by zero
+debug
+info
+warning
+error
+critical
+exception
+NoneType: None
+division by zero
+Traceback (most recent call last):
+  File "./text_to_speech/test.py", line 23, in main
+    r=a/b
+ZeroDivisionError: division by zero
+debug
+info
+warning
+error
+critical
+exception
+NoneType: None
+division by zero
+Traceback (most recent call last):
+  File "./text_to_speech/test.py", line 23, in main
+    r=a/b
+ZeroDivisionError: division by zero
+debug
+info
+warning
+error
+critical
+exception
+NoneType: None
+division by zero
+Traceback (most recent call last):
+  File "./text_to_speech/test.py", line 23, in main
+    r=a/b
+ZeroDivisionError: division by zero
+debug
+info
+warning
+error
+critical
+exception
+NoneType: None
+division by zero
+Traceback (most recent call last):
+  File "./text_to_speech/test.py", line 23, in main
+    r=a/b
+ZeroDivisionError: division by zero
+debug
+info
+warning
+error
+critical
+exception
+NoneType: None
+division by zero
+Traceback (most recent call last):
+  File "./text_to_speech/test.py", line 23, in main
+    r=a/b
+ZeroDivisionError: division by zero
+debug
+info
+warning
+error
+critical
+exception
+NoneType: None
+division by zero
+Traceback (most recent call last):
+  File "./text_to_speech/test.py", line 23, in main
+    r=a/b
+ZeroDivisionError: division by zero
+debug
+info
+warning
+error
+critical
+exception
+NoneType: None
+division by zero
+Traceback (most recent call last):
+  File "./text_to_speech/test.py", line 23, in main
+    r=a/b
+ZeroDivisionError: division by zero
+debug
+info
+warning
+error
+critical
+exception
+NoneType: None
+division by zero
+Traceback (most recent call last):
+  File "./text_to_speech/test.py", line 23, in main
+    r=a/b
+ZeroDivisionError: division by zero
+debug
+info
+warning
+error
+critical
+exception
+NoneType: None
+division by zero
+Traceback (most recent call last):
+  File "./text_to_speech/test.py", line 23, in main
+    r=a/b
+ZeroDivisionError: division by zero
+debug
+info
+warning
+error
+critical
+exception
+NoneType: None
+division by zero
+Traceback (most recent call last):
+  File "./text_to_speech/test.py", line 23, in main
+    r=a/b
+ZeroDivisionError: division by zero
+debug
+info
+warning
+error
+critical
+exception
+NoneType: None
+division by zero
+Traceback (most recent call last):
+  File "./text_to_speech/test.py", line 23, in main
+    r=a/b
+ZeroDivisionError: division by zero
+b'debug'
+b'info'
+b'warning'
+b'error'
+b'critical'
+b'exception'
+NoneType: None
+division by zero
+Traceback (most recent call last):  File './text_to_speech/test.py', line 23, in main    r=a/bZeroDivisionError: division by zero
+b'debug'
+b'info'
+b'warning'
+b'error'
+b'critical'
+b'exception'
+NoneType: None
+division by zero
+Traceback (most recent call last):  File './text_to_speech/test.py', line 23, in main    r=a/bZeroDivisionError: division by zero
+b'debug'
+b'info'
+b'warning'
+b'error'
+b'critical'
+b'exception'
+NoneType: None
+division by zero
+Traceback (most recent call last):  File './text_to_speech/test.py', line 23, in main    r=a/bZeroDivisionError: division by zero
+debug
+info
+warning
+error
+critical
+exception
+NoneType: None
+division by zero
+Traceback (most recent call last):
+  File "./text_to_speech/test.py", line 23, in main
+    r=a/b
+ZeroDivisionError: division by zero
+debug
+info
+warning
+error
+critical
+exception
+NoneType: None
+division by zero
+Traceback (most recent call last):
+  File "./text_to_speech/test.py", line 23, in main
+    r=a/b
+ZeroDivisionError: division by zero
+debug
+info
+warning
+error
+critical
+exception
+NoneType: None
+division by zero
+Traceback (most recent call last):
+  File "./text_to_speech/test.py", line 23, in main
+    r=a/b
+ZeroDivisionError: division by zero
+b'debug'
+b'info'
+b'warning'
+b'error'
+b'critical'
+b'exception'
+NoneType: None
+division by zero
+Traceback (most recent call last):  File './text_to_speech/test.py', line 23, in main    r=a/bZeroDivisionError: division by zero
+b'debug'
+b'info'
+b'warning'
+b'error'
+b'critical'
+b'exception'
+NoneType: None
+division by zero
+Traceback (most recent call last):  File './text_to_speech/test.py', line 23, in main    r=a/bZeroDivisionError: division by zero

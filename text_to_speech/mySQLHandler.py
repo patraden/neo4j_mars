@@ -6,13 +6,16 @@ import MySQLdb
 import logging
 import time
 import six
+logger = logging.getLogger(__name__)
  
 class mySQLHandler(logging.Handler):
     """
     Original Logging handler for MySQL modified for mariaDB syntax
     """
 
-    initial_sql = """CREATE TABLE IF NOT EXISTS log(
+    log_table_sql = """SHOW TABLES LIKE '%s';"""
+
+    initial_sql = """CREATE TABLE IF NOT EXISTS %s(
     Created text,
     Name text,
     LogLevel int,
@@ -60,132 +63,69 @@ class mySQLHandler(logging.Handler):
     );
     """
 
-    def __init__(self, db):
+    def __init__(self, **kwargs):
         """
-        Constructor
-        @param db: ['host','port','dbuser', 'dbpassword', 'dbname'] 
-        @return: mySQLHandler
+        Customized logging handler that puts logs to the database.
         """
         logging.Handler.__init__(self)
-        self.db = db
-        # Try to connect to DB
-        # Check if 'log' table in db already exists
-        result = self.checkTablePresence()
-        # If not exists, then create the table
-        if not result:
-            try:
-                conn=MySQLdb.connect(host=self.db['host'],port=self.db['port'],user=self.db['dbuser'],passwd=self.db['dbpassword'],db=self.db['dbname'])
-            except MySQLdb.Error as e:
-                raise Exception(e)
-                exit(-1)
-            else:
-                cur = conn.cursor()
-                try:
-                    cur.execute(mySQLHandler.initial_sql)
-                except MySQLdb.Error as e:
-                    conn.rollback()
-                    cur.close()
-                    conn.close()
-                    raise Exception(e)
-                    exit(-1)
-                else:
-                    conn.commit()
-                finally:
-                    cur.close()
-                    conn.close()
+        self.host = kwargs['host']
+        self.port = kwargs['port']
+        self.dbuser = kwargs['dbuser']
+        self.dbpassword = kwargs['dbpassword']
+        self.dbname = kwargs['dbname']
+        self.sql_conn, self.sql_cursor =  self.connect_to_db(kwargs['log_table'])
 
-    def checkTablePresence(self):
+    def connect_to_db(self, log_table):
+        """
+        Connect to MySQL database to perform logging.
+        """
         try:
-            conn=MySQLdb.connect(host=self.db['host'],port=self.db['port'],user=self.db['dbuser'],passwd=self.db['dbpassword'],db=self.db['dbname'])
-        except MySQLdb.Error as e:
-            raise Exception(e)
-            exit(-1)
-        else:
-            # Check if 'log' table in db already exists
+            conn=MySQLdb.connect(host=self.host,port=self.port,user=self.dbuser,passwd=self.dbpassword,db=self.dbname)
             cur = conn.cursor()
-            stmt = """SHOW TABLES LIKE "log";"""
-            cur.execute(stmt)
+            cur.execute(mySQLHandler.log_table_sql % log_table)
+            conn.commit()
             result = cur.fetchone()
-            cur.close()
-            conn.close()
-        if not result:
-            return 0
-        else:
-            return 1
+            if not result:
+                cur.execute(mySQLHandler.initial_sql % log_table)
+                conn.commit()
+            return conn, cur
+        except Exception:
+            return None, None
+
+    def flush(self):
+        """
+        Override to implement custom flushing behaviour.
+        """
+        if self.sql_conn:
+            self.sql_cursor.close()
+            self.sql_conn.close()
 
     def formatDBTime(self, record):
         """
         Time formatter
-        @param record:
-        @return: nothing
         """
         record.dbtime = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(record.created))
 
     def emit(self, record):
         """
-        Connect to DB, execute SQL Request, disconnect from DB
-        @param record:
-        @return:
+        Emit a record.
+        Format the record and send it to the specified database.
         """
-        # Use default formatting:
-        self.format(record)
-        # Set the database time up:
-        self.formatDBTime(record)
-        if record.exc_info:
-            record.exc_text = logging._defaultFormatter.formatException(record.exc_info)
-        else:
-            record.exc_text = ""
-        # Replace single quotes in messages
-        if isinstance(record.__dict__['message'], str):
-            record.__dict__['message'] = record.__dict__['message'].replace("'", "''")
-        if isinstance(record.__dict__['msg'], str):
-            record.__dict__['msg'] = record.__dict__['msg'].replace("'", "''")
-        # Insert log record:
-        try:
-            conn=MySQLdb.connect(host=self.db['host'],port=self.db['port'],user=self.db['dbuser'],passwd=self.db['dbpassword'],db=self.db['dbname'])
-        except MySQLdb.Error as e:
-        #    from pprint import pprint
-        #    print("The Exception during db.connect")
-        #    pprint(e)
-            raise Exception(e)
-            exit(-1)
-        # escape the message to allow for SQL special chars
-        if isinstance(record.msg, six.string_types):# check is a string
-          record.msg=conn.escape_string(record.msg)
-        sql = mySQLHandler.insertion_sql % record.__dict__
-        cur = conn.cursor()
-        try:
-            cur.execute(sql)
-        except MySQLdb.ProgrammingError as e:
-            errno, errstr = e.args
-            if not errno == 1146:
-                raise
-            cur.close() # close current cursor
-            cur = conn.cursor() # recreate it (is it mandatory?)
-            try:            # try to recreate table
-                cur.execute(mySQLHandler.initial_sql)
-            except MySQLdb.Error as e:
-                # definitly can't work...
-                conn.rollback()
-                cur.close()
-                conn.close()
-                raise Exception(e)
-                exit(-1)
-            else:   # if recreate log table is ok
-                conn.commit()
-                cur.close()
-                cur = conn.cursor()
-                cur.execute(sql)
-                conn.commit()
-                # then Exception vanished
-        except MySQLdb.Error as e:
-            conn.rollback()
-            cur.close()
-            conn.close()
-            raise Exception(e)
-            exit(-1)
-        else:
-            conn.commit()
-        finally:
-            cur.close()
-            conn.close()
+        if self.sql_conn:
+            try:
+                self.format(record)
+                self.formatDBTime(record)
+                if record.exc_info:
+                    record.exc_text = logging._defaultFormatter.formatException(record.exc_info).replace('"', "'").replace('\n','').replace('\r','')
+                else:
+                    record.exc_text = ""
+                if isinstance(record.msg, str):
+                    record.msg = record.msg.replace("'", "''")
+                if isinstance(record.msg, six.string_types):# check is a string
+                    record.msg=self.sql_conn.escape_string(record.msg)
+                sql = mySQLHandler.insertion_sql % record.__dict__
+                self.sql_cursor.execute(sql)
+                self.sql_conn.commit()
+            except Exception:
+                self.sql_conn.rollback()
+                self.handleError(record)
