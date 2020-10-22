@@ -5,17 +5,15 @@ Copied and modified from https://github.com/onemoretime/mySQLHandler/
 import MySQLdb
 import logging
 import time
-import six
-logger = logging.getLogger(__name__)
  
 class mySQLHandler(logging.Handler):
     """
-    Original Logging handler for MySQL modified for mariaDB syntax
+    Logging handler for MySQL db.
     """
 
-    log_table_sql = """SHOW TABLES LIKE '%s';"""
+    check_sql = """SHOW TABLES LIKE '{log_table}';"""
 
-    initial_sql = """CREATE TABLE IF NOT EXISTS %s(
+    create_sql = """CREATE TABLE IF NOT EXISTS {log_table}(
     Created text,
     Name text,
     LogLevel int,
@@ -31,7 +29,7 @@ class mySQLHandler(logging.Handler):
     ThreadName text
     )"""
 
-    insertion_sql = """INSERT INTO log(
+    insert_sql = """INSERT INTO {log_table}(
     Created,
     Name,
     LogLevel,
@@ -47,25 +45,25 @@ class mySQLHandler(logging.Handler):
     ThreadName
     )
     VALUES (
-    "%(dbtime)s",
-    "%(name)s",
-    %(levelno)d,
-    "%(levelname)s",
-    "%(msg)s",
-    "%(args)s",
-    "%(module)s",
-    "%(funcName)s",
-    %(lineno)d,
-    "%(exc_text)s",
-    %(process)d,
-    "%(thread)s",
-    "%(threadName)s"
+    "{dbtime}",
+    "{name}",
+    {levelno},
+    "{levelname}",
+    "{msg}",
+    "{args}",
+    "{module}",
+    "{funcName}",
+    {lineno},
+    "{exc_text}",
+    {process},
+    "{thread}",
+    "{threadName}"
     );
     """
 
     def __init__(self, **kwargs):
         """
-        Customized logging handler that puts logs to the database.
+        Customized logging handler that puts logs to MySQL db.
         """
         logging.Handler.__init__(self)
         self.host = kwargs['host']
@@ -73,28 +71,30 @@ class mySQLHandler(logging.Handler):
         self.dbuser = kwargs['dbuser']
         self.dbpassword = kwargs['dbpassword']
         self.dbname = kwargs['dbname']
-        self.sql_conn, self.sql_cursor =  self.connect_to_db(kwargs['log_table'])
+        self.log_table = kwargs['log_table']
+        self.sql_conn, self.sql_cursor =  self.connect_to_db()
 
-    def connect_to_db(self, log_table):
+    def connect_to_db(self):
         """
         Connect to MySQL database to perform logging.
+        Create log table if does not exist.
         """
         try:
             conn=MySQLdb.connect(host=self.host,port=self.port,user=self.dbuser,passwd=self.dbpassword,db=self.dbname)
             cur = conn.cursor()
-            cur.execute(mySQLHandler.log_table_sql % log_table)
+            cur.execute(mySQLHandler.check_sql.format(log_table = self.log_table))
             conn.commit()
-            result = cur.fetchone()
-            if not result:
-                cur.execute(mySQLHandler.initial_sql % log_table)
+            table_exist = cur.fetchone()
+            if not table_exist:
+                cur.execute(mySQLHandler.create_sql.format(log_table = self.log_table))
                 conn.commit()
             return conn, cur
-        except Exception:
+        except Exception: # ignoring connection and table creation exceptions as this handler meant to be used with application db
             return None, None
 
     def flush(self):
         """
-        Override to implement custom flushing behaviour.
+        Override to implement custom flushing behaviour for MySQLdb connection.
         """
         if self.sql_conn:
             self.sql_cursor.close()
@@ -102,29 +102,23 @@ class mySQLHandler(logging.Handler):
 
     def formatDBTime(self, record):
         """
-        Time formatter
+        Time formatter.
         """
         record.dbtime = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(record.created))
 
     def emit(self, record):
         """
-        Emit a record.
+        Emit a record to MySQL db.
         Format the record and send it to the specified database.
         """
         if self.sql_conn:
             try:
                 self.format(record)
                 self.formatDBTime(record)
-                if record.exc_info:
-                    record.exc_text = logging._defaultFormatter.formatException(record.exc_info).replace('"', "'").replace('\n','').replace('\r','')
-                else:
-                    record.exc_text = ""
-                if isinstance(record.msg, str):
-                    record.msg = record.msg.replace("'", "''")
-                if isinstance(record.msg, six.string_types):# check is a string
-                    record.msg=self.sql_conn.escape_string(record.msg)
-                sql = mySQLHandler.insertion_sql % record.__dict__
-                self.sql_cursor.execute(sql)
+                record.exc_text = logging._defaultFormatter.formatException(record.exc_info).replace('"', "'").replace('\n','').replace('\r','') if record.exc_info else ""
+                if isinstance(record.msg, str): record.msg = record.msg.replace("'", "''")
+                sql_stmt = mySQLHandler.insert_sql.format(**record.__dict__, log_table = self.log_table)
+                self.sql_cursor.execute(sql_stmt)
                 self.sql_conn.commit()
             except Exception:
                 self.sql_conn.rollback()
