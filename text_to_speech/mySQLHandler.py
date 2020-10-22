@@ -5,7 +5,7 @@ Copied and modified from https://github.com/onemoretime/mySQLHandler/
 import MySQLdb
 import logging
 import time
- 
+
 class mySQLHandler(logging.Handler):
     """
     Logging handler for MySQL db.
