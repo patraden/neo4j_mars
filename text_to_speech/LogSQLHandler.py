@@ -116,7 +116,8 @@ class mySQLHandler(logging.Handler):
                 self.format(record)
                 self.formatDBTime(record)
                 record.exc_text = logging._defaultFormatter.formatException(record.exc_info).replace('"', "'").replace('\n','').replace('\r','') if record.exc_info else ""
-                if isinstance(record.msg, str): record.msg = record.msg.replace("'", "''")
+                record.msg = record.getMessage().replace('"', "'") #review later. was not sure it is the best way to handle msg attribute of the record class when it comes to dbexception types
+                #if isinstance(record.msg, str): record.msg = record.msg.replace("'", "''").replace('"', "'")
                 sql_stmt = mySQLHandler.insert_sql.format(**record.__dict__, log_table = self.log_table)
                 self.sql_cursor.execute(sql_stmt)
                 self.sql_conn.commit()

@@ -2,6 +2,8 @@ import sys
 sys.path.append('/app/text_to_speech/')
 import voicerss_tts
 
+#logging.raiseExceptions = False
+
 def application(environ, start_response):
     voice = voicerss_tts.speech({
         'key': '26446b3244ee4f96aada13c3a94da441',
