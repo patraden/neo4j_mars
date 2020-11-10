@@ -1,15 +1,24 @@
 # original docker file https://github.com/neo4j/docker-neo4j-publish/tree/d812e34c70a2487fae5ee5cbb7c447b20b346afa
 # debian open jdk https://github.com/bell-sw/Liberica/tree/master/docker/repos/liberica-openjdk-debian
 # tini release including armhf https://github.com/krallin/tini/releases
-FROM bellsoft/liberica-openjdk-debian:11
+#FROM bellsoft/liberica-openjdk-debian:11
+
+#ENV NEO4J_SHA256=6da059f04f86e1a74221eb0103da38a1f645969cbbfe1b37c9de48bf55acabdc \
+#    NEO4J_TARBALL=neo4j-community-4.1.3-unix.tar.gz \
+#    NEO4J_EDITION=community \
+#    NEO4J_HOME="/var/lib/neo4j"
+#ARG NEO4J_URI=https://dist.neo4j.org/neo4j-community-4.1.3-unix.tar.gz
+#ARG TINI_SHA256="5a9b35f09ad2fb5d08f11ceb84407803a1deff96cbdc0d1222f9f8323f3f8ad4"
+#ARG TINI_URI="https://github.com/krallin/tini/releases/download/v0.19.0/tini-armhf"
+FROM openjdk:11-jdk-slim
 
 ENV NEO4J_SHA256=6da059f04f86e1a74221eb0103da38a1f645969cbbfe1b37c9de48bf55acabdc \
     NEO4J_TARBALL=neo4j-community-4.1.3-unix.tar.gz \
     NEO4J_EDITION=community \
     NEO4J_HOME="/var/lib/neo4j"
 ARG NEO4J_URI=https://dist.neo4j.org/neo4j-community-4.1.3-unix.tar.gz
-ARG TINI_SHA256="5a9b35f09ad2fb5d08f11ceb84407803a1deff96cbdc0d1222f9f8323f3f8ad4"
-ARG TINI_URI="https://github.com/krallin/tini/releases/download/v0.19.0/tini-armhf"
+ARG TINI_SHA256="12d20136605531b09a2c2dac02ccee85e1b874eb322ef6baf7561cd93f93c855"
+ARG TINI_URI="https://github.com/krallin/tini/releases/download/v0.18.0/tini"
 
 RUN addgroup --gid 7474 --system neo4j && adduser --uid 7474 --system --no-create-home --home "${NEO4J_HOME}" --ingroup neo4j neo4j
 
