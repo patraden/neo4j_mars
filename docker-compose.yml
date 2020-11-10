@@ -20,6 +20,6 @@ services:
   container_name: denis_python
   tty: true
   ports:
-   - "22:22"
+   - "2222:22"
   depends_on:
    - neo4j
