@@ -1,2 +1,0 @@
-# <wsgi_file_name>:<directory in root>:<URI>
-wsgi_test.wsgi:test_application:/test

@@ -1,5 +1,4 @@
-django
 httplib2
 urllib3
 mysqlclient
-wordnik-py3
+neo4j

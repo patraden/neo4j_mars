@@ -1,54 +1,25 @@
-# export CERTIFICATE_PASSWORD=<PASSWORD>
-# export CERTIFICATE_NAME=<PFX_FILE_NAME>
-# export BASIC_USER=<ADMIN_USER_NAME>
-# export BASIC_USER_PASSWORD=<ADMIN_USER_PASSWORD>
-# export MYSQL_ROOT_PASSWORD=<MYSQL_ROOT_PASSWORD>
 version: "3.8"
 services:
- mariadb:
-   image: tobi312/rpi-mariadb:10.3
-   container_name: mariadb
-   volumes:
-     - /home/pi/mariadbs/databases:/var/lib/mysql
-   environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-admin}
-   restart: unless-stopped
-   ports:
-      - 3306:3306
  neo4j:
   build:
    context: ./neo4j
    dockerfile: neo4j.Dockerfile
   environment:
     - NEO4J_AUTH=neo4j/s3cr3t
-  container_name: neo4j
+  container_name: denis_neo4j
   volumes:
-    - /home/pi/mod_wsgi_docker/neo4j/data:/data
-#  restart: unless-stopped
+    - ./neo4j/data:/data
+  restart: unless-stopped
   ports:
      - 7474:7474
      - 7687:7687
  python:
   build:
    context: .
-   dockerfile: MOD_WSGI_SSL.Dockerfile
-   args:
-    CERTIFICATE_PASSWORD : ${CERTIFICATE_PASSWORD:-U;BWy.t7/aj79+a7}
-    CERTIFICATE_NAME : ${CERTIFICATE_NAME:-applications.testservice.mars}
-    BASIC_USER : ${BASIC_USER:-admin}
-    BASIC_USER_PASSWORD : ${BASIC_USER_PASSWORD:-admin}
-  container_name: MOD_WSGI_SSL
+   dockerfile: python.Dockerfile
+  container_name: denis_python
   tty: true
-  volumes:
-   - /home/pi/mod_wsgi_docker/${APP1:-magic_s}:/app/${APP1:-magic_s}
-   - /home/pi/mod_wsgi_docker/${APP2:-test_application}:/app/${APP2:-test_application}
-   - /home/pi/mod_wsgi_docker/${APP3:-text_to_speech}:/app/${APP3:-text_to_speech}
-   - /home/pi/pythonstudy:/app/pythonstudy
-   - /home/pi/longnumbers:/app/longnumbers
   ports:
-   - "80:80"
-   - "8000:8000"
-   - "443:443"
+   - "22:22"
   depends_on:
-   - mariadb
    - neo4j
