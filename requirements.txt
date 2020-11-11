@@ -1,4 +1,3 @@
 httplib2
 urllib3
-mysqlclient
 neo4j
